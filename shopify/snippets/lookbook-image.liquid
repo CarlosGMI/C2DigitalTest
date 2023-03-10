@@ -1,0 +1,14 @@
+{% assign desktop_image_original = lookbook_image | img_url: '2880x' %}
+{% assign desktop_image_wide = lookbook_image | img_url: '2160x' %}
+{% assign desktop_image_standard = lookbook_image | img_url: '1440x' %}
+{% assign mobile_image_original = lookbook_image | img_url: '750x' %}
+
+<div class="lookbook__image-wrapper">
+  <picture>
+    <source srcset="{{ desktop_image_original }}" media="(min-width: 2160px)">
+    <source srcset="{{ desktop_image_wide }}" media="(min-width: 1440px)">
+    <source srcset="{{ desktop_image_standard }}" media="(min-width: 750px)">
+    <source srcset="{{ mobile_image_original }}" media="(min-width: 350px)">
+    <img src="{{ desktop_image_original }}" alt="{{ lookbook_image.alt }}">
+  </picture>
+</div>

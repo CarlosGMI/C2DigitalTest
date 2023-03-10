@@ -1,0 +1,71 @@
+<look-book>
+  <section class="lookbook">
+    <div class="lookbook-wrapper">
+      <div class="lookbook__image">
+        {% if section.settings.image %}
+          {% render 'lookbook-image', lookbook_image: section.settings.image %}
+        {% endif %}
+  
+        {% for block in section.blocks %}
+          <div class="lookbook__hotspot" data-hotspot-id="{{ forloop.index0 }}" style="--vertical-position: {{ block.settings.vertical_position }}%; --horizontal-position: {{ block.settings.horizontal_position }}%"></div>
+        {% endfor %}
+      </div>
+      <div class="lookbook__products">
+        {% render 'lookbook-carousel', slides: section.blocks %}
+      </div>
+    </div>
+  </section>
+</look-book>
+
+{% schema %}
+  {
+    "name": "Lookbook",
+    "class": "section",
+    "settings": [
+      {
+        "id": "image",
+        "type": "image_picker",
+        "label": "Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "hotspot",
+        "name": "Hotspot",
+        "limit": 6,
+        "settings": [
+          {
+            "id": "product_item",
+            "type": "product",
+            "label": "Product"
+          },
+          {
+            "id": "horizontal_position",
+            "type": "range",
+            "label": "Horizontal Position",
+            "unit": "%",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 50
+          },
+          {
+            "id": "vertical_position",
+            "type": "range",
+            "label": "Vertical Position",
+            "unit": "%",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 50
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Lookbook"
+      }
+    ]
+  }
+{% endschema %}

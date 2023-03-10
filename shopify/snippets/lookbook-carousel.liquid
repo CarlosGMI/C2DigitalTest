@@ -1,0 +1,28 @@
+{% if slides.size > 0 %}
+  <div class="lookbook__carousel-wrapper">
+    <div class="swiper lookbook__carousel">
+      <div class="swiper-wrapper">
+        {% for slide in slides %}
+          {% assign slide_product = slide.settings.product_item %}
+
+          {% if slide_product %}
+            <div class="swiper-slide lookbook__product">
+              <div class="lookbook__product-image">
+                <picture>
+                  <source srcset="{{ slide_product.featured_image | img_url: '900x' }}" media="(min-width: 750px)">
+                  <source srcset="{{ slide_product.featured_image | img_url: '750x' }}" media="(min-width: 350px)">
+                  <img src="{{ slide_product.featured_image }}" alt="{{ slide_product.featured_image.alt }}">
+                </picture>
+              </div>
+              <div class="lookbook__product-details">
+                <p>{{ slide_product.title }}</p>
+                <p>{{ slide_product.price | money_with_currency }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+{% endif %}

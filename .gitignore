@@ -1,1 +1,5 @@
+# Ignore compiled files
+shopify/assets/main.css
+shopify/assets/main.js
+
 /node_modules
